@@ -1,4 +1,7 @@
-﻿using System;
+﻿/* Lesson 4. Task 1: 1. Написать приложение, которое отображает количество
+текста, прочитанного из файла с помощью ProgressBar */
+
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -43,6 +46,7 @@ namespace FileReadingProgressBar
                     }
 
                     reader.Read(buffer, 0, buffer.Length);
+                    
                     //Thread.Sleep(20); //execution delay
 
                     // Подсчет CRC
