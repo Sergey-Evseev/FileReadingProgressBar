@@ -23,37 +23,41 @@ namespace FileReadingProgressBar
         {
 
         }
-        const int BUFFER = 1024 * 1024 * 50;    // Размер буфера = 50 Мб, но лучше
-                                                // большой не ставить, иначе скорость
-                                                // только уменьшится.
+        const int BUFFER = 1024; // Размер буфера = 1 Kb
 
 
         private void button1_Click(object sender, EventArgs e)
         {
             progressBar1.Maximum = 100;
             progressBar1.Value = 0;
-            new Thread(GetFileCrc).Start();
+            new Thread(GetFileCrc).Start();            
         }
         void GetFileCrc()
         {
             byte[] buffer = new byte[BUFFER];
-            using (FileStream reader = new FileStream(@"file", FileMode.Open, 
+            
+            //test file should be added to bin/Debug folder
+            using (FileStream reader = new FileStream("Test.txt", FileMode.Open, 
                 FileAccess.Read))
             {
-
                 long read_len = reader.Length;
                 while (reader.Position < read_len)
                 {
                     if (reader.Position + BUFFER > read_len)
-                        buffer = new byte[read_len - reader.Position];
+                    {
+                        buffer = new byte[read_len - reader.Position];                        
+                    }
 
                     reader.Read(buffer, 0, buffer.Length);
+                    //Thread.Sleep(20); //execution delay
 
-                    // Считаешь CRC
-
+                    // Подсчет CRC
                     progressBar1.Invoke(new MethodInvoker(() => {
-                        progressBar1.Value = (int)(((double)(reader.Position) / (double)(read_len)) * 100.0);
+                        progressBar1.Value = (int)(((double)(reader.Position) 
+                        / (double)(read_len)) * 100.0);                        
                     }), null);
+                    //вывод значения в лейбл
+                    label1.Text = "Progress: " + progressBar1.Value.ToString() + "%";                                    
                 }
             }
             buffer = null;
