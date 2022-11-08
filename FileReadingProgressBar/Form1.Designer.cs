@@ -73,7 +73,6 @@
             this.ImeMode = System.Windows.Forms.ImeMode.On;
             this.Name = "Form1";
             this.Text = "File Reading";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

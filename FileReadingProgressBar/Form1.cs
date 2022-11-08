@@ -17,15 +17,9 @@ namespace FileReadingProgressBar
         public Form1()
         {
             InitializeComponent();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
+        }               
         const int BUFFER = 1024; // Размер буфера = 1 Kb
-
-
+        
         private void button1_Click(object sender, EventArgs e)
         {
             progressBar1.Maximum = 100;
